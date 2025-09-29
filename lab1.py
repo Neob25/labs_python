@@ -108,13 +108,13 @@ print()
 age_stats = data.groupby(['Sex', 'Pclass'])['Age'].mean().unstack()
 
 if age_stats.loc['male', 1] > 40:
-    print("- В среднем мужчины 1 класса старше 40 лет")
+    print("в среднем мужчины 1 класса старше 40 лет")
     
 if age_stats.loc['female', 1] > 40:
-    print("- В среднем женщины 1 класса старше 40 лет")
+    print("в среднем женщины 1 класса старше 40 лет")
 
 if all(age_stats.loc['male', c] > age_stats.loc['female', c] for c in [1, 2, 3]):
-    print("- Мужчины всех классов в среднем старше, чем женщины того же класса")
+    print("мужчины всех классов в среднем старше, чем женщины того же класса")
 
 if all(age_stats.loc[s, 1] > age_stats.loc[s, 2] > age_stats.loc[s, 3] for s in ['male', 'female']):
-    print("- Пассажиры 1 класса старше 2-го класса, которые старше 3-го класса")
+    print("пассажиры 1 класса старше 2-го класса, которые старше 3-го класса")
