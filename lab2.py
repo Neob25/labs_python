@@ -55,22 +55,24 @@ filtered_data.to_csv('filtered_data.csv')
 print(f"изначально было строк: {len(data)}, стало строк: {len(filtered_data)}")
 
 
-#3D график
-fig = plt.figure(figsize=(12, 6))
-ax = fig.add_subplot(111, projection='3d')
+#  3d плоскость
+plt.figure(figsize=(12, 6))
 
-#сетка для 3D
-x1_3d = data['x1'][::10]
-x2_3d = data['x2'][::10]
-y_3d = data['y'][::10]
+# сетка
+X1, X2 = np.meshgrid(np.linspace(-100, 100, 50), 
+                     np.linspace(-20, 50, 50))
+Y = X2 / (1 + np.exp(-X1))
 
-#цветные точки 
-scatter = ax.scatter(x1_3d, x2_3d, y_3d, c=y_3d, cmap='viridis', alpha=0.5, s=20)
+# контурный график
+contour = plt.contourf(X1, X2, Y, levels=20, cmap='viridis', alpha=0.8)
+plt.colorbar(contour, label='y')
 
+plt.contour(X1, X2, Y, levels=10, colors='black', alpha=0.3, linewidths=0.5)
 
-# имена осей
-ax.set_xlabel('x1')
-ax.set_ylabel('x2')
-ax.set_zlabel('y')
+plt.xlabel('x1')
+plt.ylabel('x2')
+plt.title('Плоскость y = x2 / (1 + exp(-x1))')
+plt.grid(True, alpha=0.3)
 
+plt.tight_layout()
 plt.show()
